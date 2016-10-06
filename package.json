@@ -1,0 +1,29 @@
+{
+  "name": "generator-fe-base",
+  "version": "0.0.1",
+  "description": "Yeoman generator for Create a base folder",
+  "author": {
+    "name": "eeve",
+    "email": "eeveme@gmail.com",
+    "url": "https://www.eeve.me"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "fe-base",
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.23.0",
+    "chalk": "^1.0.0",
+    "yosay": "^1.0.0"
+  },
+  "devDependencies": {
+    "yeoman-assert": "^2.0.0",
+    "yeoman-test": "^1.0.0"
+  },
+  "repository": "eeve/generator-fe-base",
+  "license": "MIT"
+}

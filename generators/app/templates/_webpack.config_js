@@ -1,0 +1,94 @@
+var path = require('path');
+var webpack = require('webpack');
+var debug = process.env.NODE_ENV !== 'production';
+var plugins = [
+  new webpack.DefinePlugin({
+    __DEV__: debug
+  }),
+  <% if( props.useBower ){ %>
+  ,new webpack.ResolverPlugin(
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+  )
+  <% } %>
+  new webpack.BannerPlugin('<%= props.description %>'),
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.NoErrorsPlugin()
+  <% if( props.useWpDev ){ %>
+  ,new webpack.HotModuleReplacementPlugin()
+  <% } %>
+];
+
+!debug && plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    test: /(\.js)$/,
+    compress: {
+      warnings: false
+    }
+  })
+);
+
+var browsers = '{browsers:["last 2 version", "ie >= 8"]}';
+
+module.exports = {
+  context: __dirname,
+  entry: {
+    index: './app/index.js'
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: '[name].js'
+  },
+  plugins: plugins,
+  devtool: '#source-map',
+  module:{
+    loaders:[
+      <% if ( props.useUrlLoader ) { %>
+      { test: /\.png$/, loader: 'url?limit=65536&mimetype=image/png' }
+      ,{ test: /\.jpg$/, loader: 'url?limit=65536&mimetype=image/jpeg' }
+      ,{ test: /\.gif$/, loader: 'url?limit=65536&mimetype=image/gif' }
+      <% } %>
+      ,{ test: /\.css$/, loader: 'style!css!autoprefixer?'+browsers }
+      <% if ( props.useLess ) { %>
+      ,{ test: /\.less$/, loader: 'style!css!autoprefixer?'+browsers+'!less' }
+      <% } %>
+      <% if ( props.useSass ) { %>
+      ,{ test: /\.scss$/, loader: 'style!css!autoprefixer?'+browsers+'!sass' }
+      <% } %>
+      <% if ( props.useIconFont ) { %>
+      ,{ test: /\.(otf|eot|ttf|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=65536&name=[path][name].[ext]' }
+      <% } %>
+      <% if ( props.useBabel ) { %>
+      ,{ test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
+      <% } %>
+    ]
+  },
+  resolve: {
+    extensions: ['', '.js'<% if ( props.useLess ) { %>, '.less'<% } %><% if ( props.useSass ) { %>, '.scss'<% } %>],
+    modulesDirectories: ["node_modules", "bower_components"]
+  }
+  <% if ( props.useWpDev ) { %>
+  ,devServer: {
+    hot: true,
+    quiet: false,
+    colors: true,
+    inline: true,
+    compress: true,
+    contentBase: './app',
+    host: '127.0.0.1',
+    port: 8000,
+    setup: function(app) {
+      // Here you can access the Express app object and add your own custom middleware to it.
+      // For example, to define custom handlers for some paths:
+      // app.get('/some/path', function(req, res) {
+      //   res.json({ custom: 'response' });
+      // });
+    },
+    // proxy: {
+    //   '/some/path*': {
+    //     target: 'https://other-server.example.com',
+    //     secure: false
+    //   }
+    // }
+  }
+  <% } %>
+};
