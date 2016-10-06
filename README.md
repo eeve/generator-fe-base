@@ -1,4 +1,4 @@
-# generator-webpack-js-module [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-fe-base [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > 
 
 ## Installation
@@ -7,13 +7,13 @@ First, install [Yeoman](http://yeoman.io) and generator-js-module using [npm](ht
 
 ```bash
 npm install -g yo
-npm install -g generator-webpack-js-module
+npm install -g generator-fe-base
 ```
 
 Then generate your new js module:
 
 ```bash
-yo webpack-js-module
+yo fe-base
 ```
 
 ## Getting To Know Yeoman
@@ -28,9 +28,9 @@ yo webpack-js-module
 MIT © [eeve]()
 
 
-[npm-image]: https://badge.fury.io/js/generator-webpack-js-module.svg
-[npm-url]: https://npmjs.org/package/generator-webpack-js-module
-[travis-image]: https://travis-ci.org/eeve/generator-webpack-js-module.svg?branch=master
-[travis-url]: https://travis-ci.org/eeve/generator-webpack-js-module
-[daviddm-image]: https://david-dm.org/eeve/generator-webpack-js-module.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/eeve/generator-webpack-js-module
+[npm-image]: https://badge.fury.io/js/generator-fe-base.svg
+[npm-url]: https://npmjs.org/package/generator-fe-base
+[travis-image]: https://travis-ci.org/eeve/generator-fe-base.svg?branch=master
+[travis-url]: https://travis-ci.org/eeve/generator-fe-base
+[daviddm-image]: https://david-dm.org/eeve/generator-fe-base.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/eeve/generator-fe-base
